@@ -11,15 +11,13 @@ import englishToBrailleLiteralSet from './english-to-braille.js';
 function engtobrl() {
   const str = document.getElementById('sourceLangText').value;
   const splitstr = str.split('');
-  const sizeoftable = englishToBrailleLiteralSet.length;
   const sizeofinputstring = splitstr.length;
   let output = '';
+  const myMap = new Map(englishToBrailleLiteralSet);
+  let key;
   for (let i = 0; i < sizeofinputstring; i += 1) {
-    for (let j = 0; j < sizeoftable; j += 1) {
-      if (splitstr[i] === englishToBrailleLiteralSet[j][0]) {
-        output += englishToBrailleLiteralSet[j][1];
-      }
-    }
+    key = splitstr[i];
+    output += myMap.get(key);
   }
   document.getElementById('targetLangText').innerHTML = output;
 }
